@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import tango_with_django_project.settings as settings
-from rango.models import Category
-from rango.models import Page
+from rango.models import Category, Page
+from rango.forms import CategoryForm, PageForm
+from django.urls import reverse
 
 def show_category(request, category_name_slug):
     context_dict = {}
@@ -15,6 +16,42 @@ def show_category(request, category_name_slug):
         context_dict['category'] = None
         context_dict['pages'] = None
     return render(request, 'rango/category.html', context=context_dict)
+
+def add_category(request):
+    form = CategoryForm()
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            new_category = form.save()
+            # Redirect to the add_page view with the slug of the newly created category.
+            return redirect(reverse('rango:add_page', kwargs={'category_name_slug': new_category.slug}))
+        else:
+            print(form.errors)
+    return render(request, 'rango/add_category.html', {'form': form})
+def add_page(request, category_name_slug):
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+    except Category.DoesNotExist:
+        category = None
+    # You cannot add a page to a Category that does not exist...
+    if category is None:
+        return redirect('/rango/')
+    form = PageForm()
+    if request.method == 'POST':
+        form = PageForm(request.POST)
+        if form.is_valid():
+            if category:
+                page = form.save(commit=False)
+                page.category = category
+                page.views = 0
+                page.save()
+            return redirect(reverse('rango:show_category',
+                            kwargs={'category_name_slug':
+                                    category_name_slug}))
+        else:
+            print(form.errors)
+    context_dict = {'form': form, 'category': category}
+    return render(request, 'rango/add_page.html', context=context_dict)
 
 def index(request):
     top_five_pages = Page.objects.order_by('-views')[:5]
