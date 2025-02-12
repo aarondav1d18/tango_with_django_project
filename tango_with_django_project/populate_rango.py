@@ -1,23 +1,25 @@
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE',
-                    'tango_with_django_project.settings')
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+#                     'tango_with_django_project.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.settings')
+
 import django
 django.setup()
 from rango.models import Category, Page
 def populate():
     python_pages = [
-        {'title': 'Official Python Tutorial', 'url':'http://docs.python.org/3/tutorial/'},
-        {'title':'How to Think like a Computer Scientist', 'url':'http://www.greenteapress.com/thinkpython/'},
-        {'title':'Learn Python in 10 Minutes', 'url':'http://www.korokithakis.net/tutorials/python/'} 
+        {'title': 'Official Python Tutorial', 'url':'http://docs.python.org/3/tutorial/', 'views':10},
+        {'title':'How to Think like a Computer Scientist', 'url':'http://www.greenteapress.com/thinkpython/', 'views':56},
+        {'title':'Learn Python in 10 Minutes', 'url':'http://www.korokithakis.net/tutorials/python/', 'views':20}  
     ]
     django_pages = [
-        {'title':'Official Django Tutorial', 'url':'https://docs.djangoproject.com/en/2.1/intro/tutorial01/'},
-        {'title':'Django Rocks', 'url':'http://www.djangorocks.com/'},
-        {'title':'How to Tango with Django', 'url':'http://www.tangowithdjango.com/'} 
+        {'title':'Official Django Tutorial', 'url':'https://docs.djangoproject.com/en/2.1/intro/tutorial01/', 'views':5},
+        {'title':'Django Rocks', 'url':'http://www.djangorocks.com/', 'views':30},
+        {'title':'How to Tango with Django', 'url':'http://www.tangowithdjango.com/', 'views':80}
     ]
     other_pages = [
-        {'title':'Bottle', 'url':'http://bottlepy.org/docs/dev/'},
-        {'title':'Flask', 'url':'http://flask.pocoo.org'} 
+        {'title':'Bottle', 'url':'http://bottlepy.org/docs/dev/', 'views':28},
+        {'title':'Flask', 'url':'http://flask.pocoo.org', 'views':89}
     ]
     cats = {
         'Python': {'pages': python_pages, 'likesAndViews':[64,128]},
@@ -27,14 +29,15 @@ def populate():
     for cat, cat_data in cats.items():
         c = add_cat(cat, cat_data['likesAndViews'][0], cat_data['likesAndViews'][1])
         for p in cat_data['pages']:
-            add_page(c, p['title'], p['url'])
+            add_page(c, p['title'], p['url'], p['views'])
     # Print out the categories we have added with their pages
     for c in Category.objects.all():
         for p in Page.objects.filter(category=c):
             print(f'- {c.name}: {p.title}')
-def add_page(cat, title, url):
+def add_page(cat, title, url, views):
     p = Page.objects.get_or_create(category=cat, title=title)[0]
     p.url = url
+    p.views = views
     p.save()
     return p
 def add_cat(name, likes, views):
