@@ -1,0 +1,51 @@
+2025-02-02T13:22:14,941638664+01:00
+Hit:1 http://de.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 https://download.docker.com/linux/ubuntu jammy InRelease
+Get:3 https://nvidia.github.io/libnvidia-container/stable/deb/amd64  InRelease [1.477 B]
+Get:4 http://de.archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:5 https://dl.google.com/linux/chrome/deb stable InRelease [1.825 B]
+Get:6 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Hit:7 https://packages.microsoft.com/repos/code stable InRelease
+Hit:8 http://de.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Get:9 https://dl.google.com/linux/chrome/deb stable/main amd64 Packages [1.215 B]
+Fetched 261 kB in 1s (205 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Calculating upgrade...
+The following packages were automatically installed and are no longer required:
+  gir1.2-ayatanaappindicator3-0.1 libgcc-11-dev libstdc++-11-dev
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+tzdata is already the newest version (2024b-0ubuntu0.22.04).
+tzdata set to manually installed.
+The following packages were automatically installed and are no longer required:
+  gir1.2-ayatanaappindicator3-0.1 libgcc-11-dev libstdc++-11-dev
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+lsb-release is already the newest version (11.1.0ubuntu4).
+lsb-release set to manually installed.
+avahi-daemon is already the newest version (0.8-5ubuntu5.2).
+avahi-daemon set to manually installed.
+curl is already the newest version (7.81.0-1ubuntu1.20).
+git is already the newest version (1:2.34.1-1ubuntu1.12).
+software-properties-common is already the newest version (0.99.22.9).
+software-properties-common set to manually installed.
+vim is already the newest version (2:8.2.3995-1ubuntu2.22).
+wget is already the newest version (1.21.2-2ubuntu1.1).
+python3-pip is already the newest version (22.0.2+dfsg-1ubuntu0.5).
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
+
+The following packages have unmet dependencies:
+ containerd.io : Conflicts: containerd
