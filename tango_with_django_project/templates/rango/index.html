@@ -6,11 +6,12 @@ Homepage
 {% endblock %}
 
 {% block body_block %}
-    <h1>Rango says...</h1>
-    <div>
-        hey there partner! <br />
-        <strong>{{ boldmessage }}</strong><br />
-    </div>
+    <!-- Welcome Message for Logged-In Users -->
+    {% if user.is_authenticated %}
+        howdy {{ user.username }}!
+    {% else %}
+        hey there partner!
+    {% endif %}
     <div>
         <h2>Most Liked Categories</h2>
         {% if top_categories %}
