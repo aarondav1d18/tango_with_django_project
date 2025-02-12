@@ -14,9 +14,9 @@ Homepage
     {% endif %}
     <div>
         <h2>Most Liked Categories</h2>
-        {% if top_categories %}
+        {% if categories %}
             <ul>
-            {% for category in top_categories %}
+            {% for category in categories %}
                 <li><a href="/rango/category/{{ category.slug }}/">{{ category.name }}</a></li>
             {% endfor %}
             </ul>
@@ -26,9 +26,9 @@ Homepage
     </div>
     <div>
         <h2>Most Viewed Pages</h2>
-        {% if top_pages %}
+        {% if pages %}
             <ul>
-            {% for page in top_pages %}
+            {% for page in pages %}
                 <li>{{ page.title }} - Views: {{ page.views }}</li>
             {% endfor %}
             </ul>
